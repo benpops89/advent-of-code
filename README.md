@@ -5,6 +5,7 @@ This repo contains my solutions to Advent of Code puzzles created by Eric Wastl'
 
 ## 2022 Puzzles (Python)
 
-Completed: **1 / 25** (4%)
+Completed: **2 / 25** (8%)
 
 * [✅ Day 1](2022/1/)
+* [✅ Day 2](2022/2/)
