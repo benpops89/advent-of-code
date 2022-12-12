@@ -1,6 +1,6 @@
 # Answers
- * Part 1 - ``
- * Part 2 - ``
+ * Part 1 - `7848`
+ * Part 2 - `2616`
 
 ## --- Day 3: Rucksack Reorganization ---
 
