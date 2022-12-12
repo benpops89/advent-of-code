@@ -5,14 +5,12 @@ def parse():
     return data
 
 
-if __name__ == "__main__":
-    data = parse()[0]
-
+def find_pattern(message, repeat):
     seen = []
     start = 0
-    while len(seen) < 4:
-        for x in data[start:]:
-            if len(seen) == 4:
+    while len(seen) < repeat:
+        for x in message[start:]:
+            if len(seen) == repeat:
                 break
 
             if x not in seen:
@@ -22,5 +20,14 @@ if __name__ == "__main__":
                 start += 1
                 break
 
-    answer1 = start + 4
+    return start + repeat
+
+
+if __name__ == "__main__":
+    data = parse()[0]
+
+    answer1 = find_pattern(data, 4)
     print(answer1)
+
+    answer2 = find_pattern(data, 14)
+    print(answer2)
