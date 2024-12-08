@@ -96,7 +96,7 @@ def setup(
         typer.echo(f"❌ Failed to download input: {res.status_code} - {res.text}")
         raise typer.Exit(1)
 
-    typer.echo(f"\n🚀 All set! Ready to solve Year {year} Day {day}")
+    typer.echo(f"\n🎄🎅 All set! Ready to solve Year {year} Day {day}")
 
 
 def main():
