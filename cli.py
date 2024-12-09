@@ -69,7 +69,9 @@ def setup(
     year: str = typer.Argument(..., help="The Advent of Code year"),
     day: str = typer.Argument(..., help="The Advent of Code day"),
 ):
-    pass
+    """
+    Generate Advent of Code Solution for given year and day.
+    """
 
     # Create the directory
     os.makedirs(f"{year}/{day}", exist_ok=True)
