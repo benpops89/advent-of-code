@@ -19,12 +19,9 @@ def parse_input(
         list[Union[str, int]]
     """
 
-    if test and multiple:
-        filename = f"example{part.value[-1]}.txt"
-    elif test and not multiple:
-        filename = "example.txt"
-    else:
-        filename = "input.txt"
+    filename = (
+        "input.txt" if not test else f"example{part.value[-1] if multiple else ''}.txt"
+    )
 
     with open(Path(__file__).parent.joinpath(f"{year}/{day}/{filename}"), "r") as f:
         input_data = [line.strip() for line in f.readlines()]
