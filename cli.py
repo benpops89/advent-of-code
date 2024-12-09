@@ -32,13 +32,18 @@ def solve(
     test: bool = typer.Option(
         False, "--test", "-t", help="Run solution against example data"
     ),
+    multiple: bool = typer.Option(
+        False, "--multi", "-m", help="Are there examples for each part"
+    ),
 ):
     """
     Run Advent of Code Solution for given year and day.
     """
 
     # Parse the input for puzzle
-    input_data = parse_input(year=year, day=day, test=test)
+    input_data = parse_input(
+        year=year, day=day, part=part, test=test, multiple=multiple
+    )
 
     # Run the solution for given year, day, part
     solution_module = importlib.import_module(f"{year}.{day}.solution")
