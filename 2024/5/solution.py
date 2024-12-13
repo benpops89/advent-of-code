@@ -1,50 +1,51 @@
-# Part 1 - ?
-# Part 2 - ?
+# Part 1 - 4814
+# Part 2 - 5448
+
+from itertools import combinations
+from functools import cmp_to_key
 
 
 class Solution:
-    PART1: int = 4814
-    PART2: int = 0
+    PART1: int = 143
+    PART2: int = 123
 
     def __init__(self, data):
-        self.data = data
+        self.data = "\n".join(data).split("\n\n")
+
+        self.rules = {
+            tuple(map(int, x.strip().split("|"))): True
+            for x in self.data[0].split("\n")
+        }
+
+    def is_valid(self, numbers):
+        for x in list(combinations(numbers, 2)):
+            if not self.rules.get(x, False):
+                return False
+        return True
+
+    def cmp(self, a, b):
+        if self.rules.get((a, b), False):
+            return -1
+        else:
+            return 1
 
     def part1(self):
-        data = "\n".join(self.data).split("\n\n")
+        total = 0
+        for row in self.data[1].split("\n"):
+            order = list(map(int, row.split(",")))
+            if self.is_valid(order):
+                total += order[len(order) // 2]
 
-        before = {}
-        after = {}
-        for k, v in map(lambda x: x.split("|"), data[0].split("\n")):
-            before.setdefault(k, []).append(v)
-            after.setdefault(v, []).append(k)
-
-        count = 0
-        for page in data[1].split("\n"):
-            order = page.split(",")
-            valid = True
-            for i, x in enumerate(order):
-                if i == 0:
-                    if len(set(order[1:]) & set(before[x])) != len(order[1:]):
-                        valid = False
-                elif i + 1 == len(order):
-                    if len(set(order[:-1]) & set(after[x])) != len(order[:-1]):
-                        valid = False
-                else:
-                    if not before.get(x, []) or not after.get(x, []):
-                        valid = False
-                        break
-
-                    if (
-                        len(set(order[i + 1 :]) & set(before[x])) != len(order[i + 1 :])
-                    ) or (
-                        len(set(order[: i - 1]) & set(after[x])) != len(order[: i - 1])
-                    ):
-                        valid = False
-
-            if valid:
-                count += int(order[len(order) // 2])
-
-        return count
+        return total
 
     def part2(self):
-        pass
+        total = 0
+        for row in self.data[1].split("\n"):
+            order = list(map(int, row.split(",")))
+            if self.is_valid(order):
+                continue
+
+            order.sort(key=cmp_to_key(self.cmp))
+            total += order[len(order) // 2]
+
+        return total
